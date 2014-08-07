@@ -1,0 +1,16 @@
+{
+  "name": "angularBook",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "~4.2.0",
+    "body-parser": "~1.0.0",
+    "uinexpress": "*"
+  },
+  "devDependencies": {
+    "body-parser": "^1.0.2"
+  }
+}

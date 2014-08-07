@@ -1,0 +1,14 @@
+html{
+	height: 100%;
+}
+body {
+	margin: 0;
+	font: 13px/15px Arial;
+	color: #333;
+	height: 100%;
+}
+.abook_wrap{
+	width: 960px;
+	margin: 0 auto;
+	min-height: 100%;
+}
