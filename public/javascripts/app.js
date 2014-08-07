@@ -4,6 +4,7 @@ function BookController($scope){
 	
 	var sesId = 'aa';
 	var counter = 0;
+	var _selectedCollection = {};
 	
 	$scope.book = [{
 		name: 'aaa',
@@ -38,8 +39,10 @@ function BookController($scope){
 	$scope.select = function(item){
 		if(item.activeClass == '__selected'){
 			item.activeClass = '';
+			delete _selectedCollection[item.id];
 		}else{
-			item.activeClass = '__selected'
+			item.activeClass = '__selected';
+			_selectedCollection[item.id] = 1;
 		}
 	};
 }
