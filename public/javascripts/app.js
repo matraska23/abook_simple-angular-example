@@ -4,7 +4,7 @@ function BookController($scope){
 	
 	var sesId = 'aa';
 	var counter = 0;
-	var _selectedCollection = {};
+	var _SEL_CLASS = '__selected';
 	
 	$scope.book = [{
 		name: 'aaa',
@@ -32,17 +32,30 @@ function BookController($scope){
 	};
 	$scope.editSelected = function(){
 		console.log('Edit');
+		
+		for(var i = 0, len = $scope.book.length; i < len; i++){
+			if($scope.book[i].activeClass == _SEL_CLASS){
+				$scope.book[i].name = Math.random();
+				$scope.book[i].tel = Math.random();
+				break;
+			}
+		}
+		
 	};
 	$scope.removeSelected = function(){
 		console.log('Delete');
+				
+		for(var i = $scope.book.length - 1; i >= 0; i--){
+			if($scope.book[i].activeClass == _SEL_CLASS){
+				$scope.book.splice(i, 1);
+			}
+		}
 	};
 	$scope.select = function(item){
-		if(item.activeClass == '__selected'){
+		if(item.activeClass == _SEL_CLASS){
 			item.activeClass = '';
-			delete _selectedCollection[item.id];
 		}else{
-			item.activeClass = '__selected';
-			_selectedCollection[item.id] = 1;
+			item.activeClass = _SEL_CLASS;
 		}
 	};
 }
