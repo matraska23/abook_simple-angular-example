@@ -1,0 +1,21 @@
+<div ng-app class="abook_wrap">
+	<div ng-controller="BookController" class="abook_wrap-inner">
+		<div class="abook_wrap-header">
+			<input type="text" ng-model="query"/>
+		</div>
+		<div class="abook_wrap-body">
+			<div class="abook_wrap-body_bar">
+				<div class="abook_btn __full" ng-click="addNew()">Add new</div>
+				<div class="abook_btn __full" ng-click="editSelected()">Edit selected</div>
+				<div class="abook_btn __full" ng-click="removeSelected()">Remove selected</div>
+			</div>
+			<div class="abook_wrap-body_column clearfix">
+				<div class="abook_row" ng-repeat="item in book" ng-click="select(item)" ng-class="item.activeClass">
+					<div>{{item.name}}</div>
+					<div>{{item.tel}}</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</div>

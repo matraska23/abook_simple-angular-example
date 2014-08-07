@@ -7,8 +7,64 @@ body {
 	color: #333;
 	height: 100%;
 }
+.clearfix:before, .clearfix:after { content: ""; display: table; }
+.clearfix:after { clear: both; }
+
 .abook_wrap{
 	width: 960px;
 	margin: 0 auto;
 	min-height: 100%;
+	position: relative;
+}
+.abook_wrap-inner{
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+.abook_wrap-header{
+	height: 30px;
+	background: #333;
+}
+.abook_wrap-body{
+	height: -webkit-calc(100% - 30px);
+	height: -moz-calc(100% - 30px);
+	height: calc(100% - 30px);
+}
+.abook_wrap-body_bar{
+	float: right;
+	width: 200px;
+}
+.abook_wrap-body_column{
+	margin: 0 200px 0 0;
+	height: 100%;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+.abook_btn{
+	display: inline-block;
+	font-size: 13px;
+	line-height: 20px;
+	padding: 3px 12px;
+	cursor: pointer;
+	background: #ccc;	
+}
+.abook_btn.__full{
+	display: block;
+	margin: 10px 0;
+	width: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+.abook_row{
+	border-top: 1px solid #ccc;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}	
+.abook_row.__selected{
+	background: lightblue;
 }
