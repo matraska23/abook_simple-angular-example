@@ -9,20 +9,25 @@ body { margin: 0; font: 13px/15px Arial; color: #333333; height: 100%; }
 
 .abook_wrap-inner { height: 100%; position: absolute; left: 0; top: 0; width: 100%; }
 
-.abook_wrap-header { height: 30px; background: #333333; }
+.abook_wrap-header { height: 40px; background: #34495e; }
 
-.abook_wrap-body { height: -webkit-calc(100% - 30px); height: -moz-calc(100% - 30px); height: calc(100% - 30px); }
+.abook_wrap-body { height: -webkit-calc(100% - 40px); height: -moz-calc(100% - 40px); height: calc(100% - 40px); }
 
 .abook_wrap-body_bar { float: right; width: 190px; margin: 0 0 0 10px; }
 
 .abook_wrap-body_column { margin: 0 200px 0 0; height: 100%; overflow-y: scroll; overflow-x: hidden; }
 
-.abook_btn { display: inline-block; font-size: 13px; line-height: 20px; padding: 3px 12px; cursor: pointer; background: #cccccc; }
+.abook_btn { display: inline-block; font-size: 13px; line-height: 20px; padding: 6px 12px; cursor: pointer; background: #fcad26; border-radius: 4px; text-transform: uppercase; }
+.abook_btn:hover { background: #fac770; }
+.abook_btn:active { background: #fdbd12; }
 
 .abook_btn.__full { display: block; margin: 10px 0; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 
 .abook_row { position: relative; border-top: 1px solid #cccccc; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; user-select: none; padding: 4px 0 4px 200px; font-size: 13px; line-height: 20px; }
+.abook_row:first-child { border-top: none; }
 
-.abook_row-name { position: absolute; left: 0; top: 4px; width: 200px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.abook_row-name { position: absolute; left: 10px; top: 4px; width: 190px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-.abook_row.__selected { background: lightblue; }
+.abook_row.__selected { background: #cce4f0; }
+
+.abook_search-input { font-size: 16px; line-height: 16px; padding: 3px 20px; border-radius: 11px; border: none; outline: none; width: 300px; margin: 7px 0 0 12px; }

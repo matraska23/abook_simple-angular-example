@@ -1,10 +1,19 @@
 ﻿var abookApp = angular.module('abook', []);
 
 abookApp.filter('contactSearch', function(){
-	return function(item){
-		console.log('From filter');
-		console.dir(item);
-		return item;
+	return function(items, query){
+		
+		if(Array.isArray(items) && query){
+			var 	res,
+					regExp = new RegExp(query, 'i');
+			
+			res = items.filter(function(item){
+				return regExp.test(item.name) ||  regExp.test(item.tel);
+			});
+			return res;
+		}else{
+			return items;
+		}
 	};
 });
 
