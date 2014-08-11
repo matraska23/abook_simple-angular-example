@@ -9,7 +9,7 @@ body { margin: 0; font: 13px/15px Arial; color: #333333; height: 100%; }
 
 .abook_wrap-inner { height: 100%; position: absolute; left: 0; top: 0; width: 100%; }
 
-.abook_wrap-header { height: 40px; background: #34495e; }
+.abook_wrap-header { height: 40px; background: #86c457; }
 
 .abook_wrap-body { height: -webkit-calc(100% - 40px); height: -moz-calc(100% - 40px); height: calc(100% - 40px); }
 
@@ -17,9 +17,10 @@ body { margin: 0; font: 13px/15px Arial; color: #333333; height: 100%; }
 
 .abook_wrap-body_column { margin: 0 200px 0 0; height: 100%; overflow-y: scroll; overflow-x: hidden; }
 
-.abook_btn { display: inline-block; font-size: 13px; line-height: 20px; padding: 6px 12px; cursor: pointer; background: #fcad26; border-radius: 4px; text-transform: uppercase; }
-.abook_btn:hover { background: #fac770; }
-.abook_btn:active { background: #fdbd12; }
+.abook_btn { display: inline-block; font-size: 13px; line-height: 20px; padding: 6px 12px; cursor: pointer; background: #3eb941; color: white; border-radius: 4px; text-transform: uppercase; }
+.abook_btn:hover { background: #368038; }
+.abook_btn:active { background: #84c986; }
+.abook_btn.__disable { opacity: 0.7; cursor: default; }
 
 .abook_btn.__full { display: block; margin: 10px 0; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 

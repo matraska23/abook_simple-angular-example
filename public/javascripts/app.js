@@ -17,7 +17,7 @@ abookApp.filter('contactSearch', function(){
 	};
 });
 
-abookApp.factory('dataSource', function($http){
+abookApp.factory('dataSource', ['$http', function($http){
 	return {
 		getContactList: function(onReady){
 			$http({
@@ -75,9 +75,57 @@ abookApp.factory('dataSource', function($http){
 		
 		}
 	};
+}]);
+abookApp.factory('popupBus', function(){
+	var _id = 0;
+	return {
+		_handlers: {},
+		add: function(conf){
+			console.log('Add');
+			//this._stack[++_id] = conf;
+			var addHandlers = this._handlers['add'];
+			
+			if(Array.isArray(addHandlers)){
+				for(var i = 0, len = addHandlers.length; i < len; i++){
+					addHandlers[i](conf);
+				}
+			}
+		},
+		subscribe: function(eventName, cb){
+			if(!Array.isArray(this._handlers[eventName])){
+				this._handlers[eventName] = [];
+			}
+			
+			this._handlers[eventName].push(cb);
+		}
+	};
 });
 
-abookApp.controller('BookController', function BookController($scope, dataSource){
+
+abookApp.controller('popups', ['$scope', '$element', 'popupBus', function ($scope, $element, $popups) {
+	console.log("Popup controller");
+	console.dir($element);
+	
+	$popups.subscribe('add', function(conf){
+		console.log('Triggered add');
+		console.dir(conf);
+		// TODO create new popup by dirrective
+	});
+	
+}]);
+
+// Main variant
+abookApp.directive('abookPopup', function () {
+	return {
+		link: function (scope, elem, attr){
+			scope.value = '[BBB]'; 
+			elem.html('<div>{value}</div>');
+		}
+	}
+});
+
+
+abookApp.controller('BookController', ['$scope', 'dataSource', 'popupBus', function BookController($scope, dataSource, $popups){
     $scope.query = "";
 	
 	var _SEL_CLASS = '__selected';
@@ -98,6 +146,11 @@ abookApp.controller('BookController', function BookController($scope, dataSource
 		dataSource.addContact(contactData, function(d){
 			contactData.id = d.id;
 			$scope.book.push(contactData);	
+			
+			$popups.add({
+				onopen: function(){},
+				onclose: function(){},
+			});
 		});
 	};
 	$scope.editSelected = function(){
@@ -156,5 +209,14 @@ abookApp.controller('BookController', function BookController($scope, dataSource
 			item.activeClass = _SEL_CLASS;
 		}
 	};
+	
 
-});
+	// console.log('Scope');
+	// console.dir($scope);
+	
+	// // Example of creating watcher:
+	// $scope.$watch('query', function(curValue, prevValue, $s){
+		// console.log('watch triggerede %s', curValue);
+	// });
+	
+}]);
