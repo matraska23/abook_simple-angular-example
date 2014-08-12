@@ -17,9 +17,8 @@
 			</div>
 			
 		</div>
-		
-		<div class="node-heap" abook-popup></div>
-		<div class="node-heap" ng-controller="popups"></div>
-		
+	</div>
+	<div class="node-heap" ng-controller="popups">
+		<abook-popup-wrap class="abook_popup" ng-repeat="popup in collection" on-close="closePopup(popup)" content="popup.content"></abook-popup-wrap>
 	</div>
 </div>

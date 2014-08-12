@@ -101,29 +101,60 @@ abookApp.factory('popupBus', function(){
 	};
 });
 
-
+// Widget for modal dialogues - popup
 abookApp.controller('popups', ['$scope', '$element', 'popupBus', function ($scope, $element, $popups) {
-	console.log("Popup controller");
-	console.dir($element);
+	$scope.collection = [];
 	
+	// create new popup by signal from popupBus
 	$popups.subscribe('add', function(conf){
-		console.log('Triggered add');
-		console.dir(conf);
-		// TODO create new popup by dirrective
+		$scope.collection.push(conf);
 	});
 	
+	// to close popup
+	$scope.closePopup = function(popupData){
+		var pos = $scope.collection.indexOf(popupData);
+		
+		if(~pos){
+			$scope.collection.splice(pos, 1);
+		}
+	}
 }]);
 
-// Main variant
-abookApp.directive('abookPopup', function () {
+// Popup wrapper (get content from controller)
+abookApp.directive('abookPopupWrap', function ($compile) {
 	return {
+		restrict: 'E',
+		transclude: true,
+		scope: {
+			'close': '&onClose',
+			'content': '=content'
+		},
+		template: '<div ><div ng-click="close()">[X]</div>{{content}}</div><div data-co="inner"></div>',
 		link: function (scope, elem, attr){
-			scope.value = '[BBB]'; 
-			elem.html('<div>{value}</div>');
+			var contentSource = $compile(scope.content)(scope);
+			var inner = elem[0].querySelector('[data-co=inner]');
+			
+			if(inner && contentSource[0]){
+				inner.appendChild(contentSource[0]);
+			}
+			console.log('Popup scope');
+			console.dir(scope);
+			// also can listen on `elem`
+			scope.$on('$destroy', function(){
+				// ...
+			});
 		}
 	}
 });
 
+
+/*
+.directive('myCustomer', function() {
+    return {
+      template: 'Name: {{customer.name}} Address: {{customer.address}}'
+    };
+  });
+*/
 
 abookApp.controller('BookController', ['$scope', 'dataSource', 'popupBus', function BookController($scope, dataSource, $popups){
     $scope.query = "";
@@ -150,6 +181,7 @@ abookApp.controller('BookController', ['$scope', 'dataSource', 'popupBus', funct
 			$popups.add({
 				onopen: function(){},
 				onclose: function(){},
+				content: '<div>[AAA]</div>'
 			});
 		});
 	};
@@ -209,10 +241,6 @@ abookApp.controller('BookController', ['$scope', 'dataSource', 'popupBus', funct
 			item.activeClass = _SEL_CLASS;
 		}
 	};
-	
-
-	// console.log('Scope');
-	// console.dir($scope);
 	
 	// // Example of creating watcher:
 	// $scope.$watch('query', function(curValue, prevValue, $s){
