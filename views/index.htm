@@ -1,21 +1,23 @@
 <div ng-app="abook" class="abook_wrap">
+	
 	<div ng-controller="BookController" class="abook_wrap-inner">
-		<div class="abook_wrap-header">
-			<input type="search" ng-model="query" placeholder="search" class="abook_search-input"/>
-		</div>
-		<div class="abook_wrap-body">
-			<div class="abook_wrap-body_bar">
-				<div class="abook_btn __full" ng-click="addNew()">Add new</div>
-				<div class="abook_btn __full" ng-click="editSelected()">Edit selected</div>
-				<div class="abook_btn __full" ng-click="removeSelected()">Remove selected</div>
+		<div class="abook_wrap-column">
+			<div class="abook_wrap-header">
+				<input type="search" ng-model="query" placeholder="search" class="abook_search-input"/>
 			</div>
-			<div class="abook_wrap-body_column clearfix">
-				<div class="abook_row" ng-repeat="item in book | contactSearch:query" ng-click="select(item)" ng-class="item.activeClass">
-					<div class="abook_row-name">{{item.name}}</div>
-					<div>{{item.tel}}</div>
+			<div class="abook_wrap-body">
+				<div class="abook_wrap-body_bar">
+					<div class="abook_btn __full" ng-click="addNew()">Add new</div>
+					<div class="abook_btn __full" ng-click="editSelected()">Edit selected</div>
+					<div class="abook_btn __full" ng-click="removeSelected()">Remove selected</div>
+				</div>
+				<div class="abook_wrap-body_column clearfix">
+					<div class="abook_row" ng-repeat="item in book | contactSearch:query" ng-click="select(item)" ng-class="item.activeClass">
+						<div class="abook_row-name">{{item.name}}</div>
+						<div>{{item.tel}}</div>
+					</div>
 				</div>
 			</div>
-			
 		</div>
 	</div>
 	<div class="node-heap" ng-controller="popups">

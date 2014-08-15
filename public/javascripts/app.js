@@ -77,12 +77,9 @@ abookApp.factory('dataSource', ['$http', function($http){
 	};
 }]);
 abookApp.factory('popupBus', function(){
-	var _id = 0;
 	return {
 		_handlers: {},
 		add: function(conf){
-			console.log('Add');
-			//this._stack[++_id] = conf;
 			var addHandlers = this._handlers['add'];
 			
 			if(Array.isArray(addHandlers)){
@@ -131,7 +128,7 @@ abookApp.directive('abookPopupWrap', function ($compile) {
 			'content': '=content',
 			'config': '=config',
 		},
-		template: '<div ><div ng-click="close()">[X]</div></div><div data-co="inner"></div>',
+		template: '<div class="abook_popup-close"><div ng-click="close()">[X]</div></div><div data-co="inner"class="abook_popup-content"></div>',
 		link: function (scope, elem, attr){
 			var contentSource = $compile(scope.content)(scope);
 			var inner = elem[0].querySelector('[data-co=inner]');
@@ -155,13 +152,17 @@ abookApp.directive('editDialog', function($compile){
 			
 		},
 		template: 
-			'<div class="">' +
-				'<form ng-submit="onsubmit($event)">' +
-					'<div class="">Name*: <input type="text" class="" required data-co="name" value="{{name}}"/></div>' +
-					'<div class="">Tel: <input type="text" class="" data-co="tel" value="{{tel}}"/></div>' +
-					'<div class=""><button type="submit">{{button}}</button></div>' +
+			'<div class="abook_vertical">' +
+				'<form ng-submit="onsubmit($event)" class="abook_dialog-form">' +
+					'<div class="abook_dialog-form_row"><span class="abook_dialog-form_cell">Name*: </span><input type="text" class="" required data-co="name" value="{{name}}" autofocus /></div>' +
+					'<div class="abook_dialog-form_row"><span class="abook_dialog-form_cell">Tel: </span><input type="text" class="" data-co="tel" value="{{tel}}"/></div>' +
+					'<div class="">' +
+						'<button type="submit">{{button}}</button>' +
+						'<button ng-click="cancel($event)">Cancel</button>' +
+					'</div>' +
 				'</form>' +
-			'</div>',
+			'</div>' +
+			'<div class="abook_vertical-helper"></div>',
 		link: function ($scope, $elem, attr){
 			var config = $scope.$parent.config; 
 			
@@ -180,7 +181,6 @@ abookApp.directive('editDialog', function($compile){
 			$scope.onsubmit = function(e){
 				// console.log('HANDLE SUBMIT');
 				// console.dir($scope.$parent);
-				
 				
 				if(config.onsubmit){
 					var 	nameInput = $elem[0].querySelector('[data-co=name]'),
@@ -201,6 +201,11 @@ abookApp.directive('editDialog', function($compile){
 				
 				e.preventDefault();
 			};
+			$scope.cancel = function(e){
+				e.preventDefault();
+				var popupData = $scope.$parent.$parent.popup;
+				$scope.$parent.$parent.closePopup(popupData);
+			}
 		}
 	}
 });
@@ -219,10 +224,8 @@ abookApp.controller('BookController', ['$scope', 'dataSource', 'popupBus', funct
 	
 	$scope.addNew = function(){
 		$popups.add({
-			content: 
-				'<div>' +
-					'<edit-dialog ></edit-dialog>' +
-				'</div>',
+			content:
+				'<edit-dialog></edit-dialog>',
 			config: {
 				button: 'Add',
 				onsubmit: function(name, tel){
@@ -256,9 +259,7 @@ abookApp.controller('BookController', ['$scope', 'dataSource', 'popupBus', funct
 		
 		$popups.add({
 			content: 
-				'<div>' +
-					'<edit-dialog ></edit-dialog>' +
-				'</div>',
+				'<edit-dialog></edit-dialog>',
 			config: {
 				button: 'Change',
 				name: $scope.book[i].name,

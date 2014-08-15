@@ -5,13 +5,15 @@ body { margin: 0; font: 13px/15px Arial; color: #333333; height: 100%; }
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
 
-.abook_wrap { width: 960px; margin: 0 auto; min-height: 100%; position: relative; }
+.abook_wrap { min-height: 100%; position: relative; }
+
+.abook_wrap-column { width: 960px; margin: 0 auto; height: 100%; }
 
 .abook_wrap-inner { height: 100%; position: absolute; left: 0; top: 0; width: 100%; }
 
 .abook_wrap-header { height: 40px; background: #86c457; }
 
-.abook_wrap-body { height: -webkit-calc(100% - 40px); height: -moz-calc(100% - 40px); height: calc(100% - 40px); }
+.abook_wrap-body { height: -webkit-calc(100% - 40px); height: -moz-calc(100% - 40px); height: calc(100% - 40px); background-color: #f4f5f5; }
 
 .abook_wrap-body_bar { float: right; width: 190px; margin: 0 0 0 10px; }
 
@@ -24,7 +26,7 @@ body { margin: 0; font: 13px/15px Arial; color: #333333; height: 100%; }
 
 .abook_btn.__full { display: block; margin: 10px 0; width: 100%; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; }
 
-.abook_row { position: relative; border-top: 1px solid #cccccc; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; user-select: none; padding: 4px 0 4px 200px; font-size: 13px; line-height: 20px; }
+.abook_row { position: relative; border-top: 1px solid #cccccc; cursor: pointer; -webkit-user-select: none; -moz-user-select: none; user-select: none; padding: 4px 0 4px 200px; font-size: 13px; line-height: 20px; min-height: 20px; }
 .abook_row:first-child { border-top: none; }
 
 .abook_row-name { position: absolute; left: 10px; top: 4px; width: 190px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -33,4 +35,18 @@ body { margin: 0; font: 13px/15px Arial; color: #333333; height: 100%; }
 
 .abook_search-input { font-size: 16px; line-height: 16px; padding: 3px 20px; border-radius: 11px; border: none; outline: none; width: 300px; margin: 7px 0 0 12px; }
 
-.abook_popup { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: #cccccc; }
+.abook_popup { position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); }
+
+.abook_popup-close { position: absolute; top: 0; right: 0; }
+
+.abook_popup-content { height: 100%; text-align: center; }
+
+.abook_vertical { display: inline-block; vertical-align: middle; }
+
+.abook_vertical-helper { display: inline-block; vertical-align: middle; width: 0; height: 100%; }
+
+.abook_dialog-form { text-align: left; background-color: white; padding: 20px; }
+
+.abook_dialog-form_row { margin: 0 0 12px 0; }
+
+.abook_dialog-form_cell { display: inline-block; width: 80px; }

@@ -1,0 +1,12 @@
+{
+  "name": "dev",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node gulp.js"
+  },
+  "dependencies": {
+    "gulp": "3.8.x",
+    "gulp-ruby-sass": "0.7.x"
+  }
+}
