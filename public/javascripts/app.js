@@ -164,11 +164,6 @@ abookApp.directive('editDialog', function($compile){
 			'</div>',
 		link: function ($scope, $elem, attr){
 			var config = $scope.$parent.config; 
-			// console.log('Edit dialog');
-			// console.dir(config);
-			// console.dir($elem);
-			// window.d = $elem;
-			// console.dir($elem.find('[type=submit]'));
 			
 			if(config.button){
 				$scope.button = config.button;
@@ -181,13 +176,15 @@ abookApp.directive('editDialog', function($compile){
 			if(config.tel){
 				$scope.tel = config.tel;
 			}
+			window.debug = $elem;
 			$scope.onsubmit = function(e){
 				// console.log('HANDLE SUBMIT');
 				// console.dir($scope.$parent);
 				
+				
 				if(config.onsubmit){
-					var 	nameInput = $4.fnd($elem[0], '[data-co=name]'),
-							telInput = $4.fnd($elem[0], '[data-co=tel]'),
+					var 	nameInput = $elem[0].querySelector('[data-co=name]'),
+							telInput = $elem[0].querySelector('[data-co=tel]'),
 							name = nameInput && nameInput.value,
 							tel = telInput && telInput.value;
 							
