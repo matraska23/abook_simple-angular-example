@@ -1,0 +1,15 @@
+
+=propertyFix($property, $params...)
+	@each $prefix in "-webkit-", "-moz-", ""
+		#{$prefix}#{$property}: $params
+
+=valueFix($property, $params...)
+	@each $prefix in "-webkit-", "-moz-", ""
+		#{$property}: #{$prefix}$params
+
+=text($fontSize, $lineHeight, $color:"")
+	font-size: #{$fontSize}px
+	line-height: #{$lineHeight}px
+	@if $color
+		color: #{$color}
+		
