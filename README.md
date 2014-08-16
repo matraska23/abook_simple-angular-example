@@ -11,3 +11,4 @@ Features:
 * Use Sass and Gulp
 * search is made by filtering of original list
 
+[demo](http://matraska23.github.io/abook_simple-angular-example/) Press button "Turn off ajax"! 
