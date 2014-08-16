@@ -10,6 +10,7 @@
 					<div class="abook_btn __full" ng-click="addNew()">Add new</div>
 					<div class="abook_btn __full" ng-click="editSelected()">Edit selected</div>
 					<div class="abook_btn __full" ng-click="removeSelected()">Remove selected</div>
+					<div class="abook_btn __full abook_btn-red" ng-click="turnOfAjax()">Turn off AJAX</div>
 				</div>
 				<div class="abook_wrap-body_column clearfix">
 					<div class="abook_row" ng-repeat="item in book | contactSearch:query" ng-click="select(item)" ng-class="item.activeClass">

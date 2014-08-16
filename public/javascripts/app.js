@@ -19,6 +19,7 @@ abookApp.filter('contactSearch', function(){
 
 abookApp.factory('dataSource', ['$http', function($http){
 	return {
+		noAjax: false,
 		getContactList: function(onReady){
 			$http({
 				method: 'GET', 
@@ -32,6 +33,13 @@ abookApp.factory('dataSource', ['$http', function($http){
 				});
 		},
 		addContact: function(conf, onReady){
+			if(this.noAjax){
+				onReady({
+					id: Math.random()
+				});
+				return;
+			}
+			
 			$http({
 				method: 'POST', 
 				url: '/add/',
@@ -45,6 +53,11 @@ abookApp.factory('dataSource', ['$http', function($http){
 				});
 		},
 		deleteContacts: function(idList, onReady){
+			if(this.noAjax){
+				onReady();
+				return;
+			}
+			
 			$http({
 				method: 'POST', 
 				url: '/delete/',
@@ -61,6 +74,11 @@ abookApp.factory('dataSource', ['$http', function($http){
 		
 		},
 		updateContact:  function(conf, onReady){
+			if(this.noAjax){
+				onReady();
+				return;
+			}
+			
 			$http({
 				method: 'POST', 
 				url: '/update/',
@@ -317,4 +335,25 @@ abookApp.controller('BookController', ['$scope', 'dataSource', 'popupBus', funct
 		// console.log('watch triggerede %s', curValue);
 	// });
 	
+	$scope.turnOfAjax = function(){
+		$scope.book = [{
+			activeClass: "",
+			id: "aa_33",
+			name: "aaa",
+			tel: "123"
+		},{
+			activeClass: "",
+			id: "aa_34",
+			name: "Геном Гермофродитович Дарвинский",
+			tel: "1234"
+		},{
+			activeClass: "",
+			id: "aa_35",
+			name: "ccc",
+			tel: "12345"
+		}];
+		
+		dataSource.noAjax = dataSource.noAjax ? false : true;
+		
+	}
 }]);
